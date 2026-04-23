@@ -17,7 +17,7 @@ function ProcessCard({ step, index }: { step: ProcessStep; index: number }) {
         <motion.div
           whileHover={{ scale: 1.08 }}
           transition={{ type: 'spring', stiffness: 300 }}
-          className="w-20 h-20 border border-[#C9A84C]/30 bg-[#1A1A1A] flex items-center justify-center group-hover:border-[#C9A84C] transition-colors duration-300"
+          className="w-20 h-20 border border-[#C9A84C]/30 bg-white flex items-center justify-center group-hover:border-[#C9A84C] transition-colors duration-300 shadow-sm"
         >
           <span className="text-2xl" aria-hidden="true">{step.icon}</span>
         </motion.div>
@@ -26,10 +26,10 @@ function ProcessCard({ step, index }: { step: ProcessStep; index: number }) {
         </div>
       </div>
 
-      <h3 className="font-serif text-xl font-light text-white mb-3 group-hover:text-[#C9A84C] transition-colors duration-300">
+      <h3 className="font-serif text-xl font-light text-[#1A1208] mb-3 group-hover:text-[#C9A84C] transition-colors duration-300">
         {step.title}
       </h3>
-      <p className="text-[#8A8A8A] text-sm leading-relaxed max-w-xs">
+      <p className="text-[#7A6E62] text-sm leading-relaxed max-w-xs">
         {step.description}
       </p>
     </motion.div>
@@ -38,7 +38,7 @@ function ProcessCard({ step, index }: { step: ProcessStep; index: number }) {
 
 export function Process() {
   return (
-    <section id="process" className="py-28 px-6 bg-[#0E0E0E]">
+    <section id="process" className="py-28 px-6 bg-[#FAFAF8]">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           eyebrow="How It Works"

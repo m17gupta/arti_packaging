@@ -15,7 +15,7 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
       whileHover={{ y: -8 }}
-      className="group bg-[#1A1A1A] border border-[#2E2E2E] hover:border-[#C9A84C]/40 transition-all duration-500 flex flex-col"
+      className="group bg-white border border-[#E5DED5] hover:border-[#C9A84C]/50 transition-all duration-500 flex flex-col shadow-sm hover:shadow-md"
     >
       <div className="relative overflow-hidden h-64">
         <motion.img
@@ -23,14 +23,14 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white/60 to-transparent" />
         {product.badge && (
           <div className="absolute top-4 left-4">
             <Badge variant="gold">{product.badge}</Badge>
           </div>
         )}
         <div className="absolute bottom-4 right-4">
-          <span className="font-serif text-2xl font-light text-white">{product.price}</span>
+          <span className="font-serif text-2xl font-light text-[#1A1208]">{product.price}</span>
         </div>
       </div>
 
@@ -38,16 +38,16 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
         <p className="text-[10px] tracking-[0.25em] uppercase text-[#C9A84C] mb-2">
           {product.category}
         </p>
-        <h3 className="font-serif text-xl font-light text-white mb-3 group-hover:text-[#C9A84C] transition-colors duration-300">
+        <h3 className="font-serif text-xl font-light text-[#1A1208] mb-3 group-hover:text-[#C9A84C] transition-colors duration-300">
           {product.name}
         </h3>
-        <p className="text-[#8A8A8A] text-sm leading-relaxed mb-5 flex-1">
+        <p className="text-[#7A6E62] text-sm leading-relaxed mb-5 flex-1">
           {product.description}
         </p>
 
         <ul className="space-y-1.5 mb-6">
           {product.features.map((feature) => (
-            <li key={feature} className="flex items-center gap-2 text-xs text-[#B0B0B0]">
+            <li key={feature} className="flex items-center gap-2 text-xs text-[#5C5242]">
               <Check size={11} className="text-[#C9A84C] shrink-0" />
               {feature}
             </li>
@@ -69,7 +69,7 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
 
 export function FeaturedProducts() {
   return (
-    <section id="products" className="py-28 px-6 bg-[#0E0E0E]">
+    <section id="products" className="py-28 px-6 bg-[#FAFAF8]">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           eyebrow="Featured Products"
@@ -90,7 +90,7 @@ export function FeaturedProducts() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mt-12"
         >
-          <p className="text-[#8A8A8A] text-sm mb-4">
+          <p className="text-[#7A6E62] text-sm mb-4">
             Looking for something unique? We create fully bespoke packages.
           </p>
           <Button

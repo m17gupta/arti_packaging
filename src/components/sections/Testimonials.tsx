@@ -12,25 +12,25 @@ function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; ind
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="bg-[#1A1A1A] border border-[#2E2E2E] p-8 flex flex-col gap-5 group hover:border-[#C9A84C]/30 transition-all duration-300"
+      className="bg-white border border-[#E5DED5] p-8 flex flex-col gap-5 group hover:border-[#C9A84C]/40 transition-all duration-300 shadow-sm hover:shadow-md"
     >
       <div className="text-3xl text-[#C9A84C]/40 font-serif leading-none select-none">&ldquo;</div>
 
       <StarRating rating={testimonial.rating} />
 
-      <blockquote className="text-[#B0B0B0] text-sm leading-relaxed italic flex-1">
+      <blockquote className="text-[#5C5242] text-sm leading-relaxed italic flex-1">
         {testimonial.quote}
       </blockquote>
 
-      <div className="flex items-center gap-4 pt-4 border-t border-[#2E2E2E]">
+      <div className="flex items-center gap-4 pt-4 border-t border-[#E5DED5]">
         <img
           src={testimonial.avatarUrl}
           alt={testimonial.name}
-          className="w-12 h-12 object-cover border border-[#2E2E2E]"
+          className="w-12 h-12 object-cover border border-[#E5DED5]"
         />
         <div>
-          <p className="text-white text-sm font-medium">{testimonial.name}</p>
-          <p className="text-[#8A8A8A] text-xs mt-0.5">
+          <p className="text-[#1A1208] text-sm font-medium">{testimonial.name}</p>
+          <p className="text-[#7A6E62] text-xs mt-0.5">
             {testimonial.role}, {testimonial.company}
           </p>
         </div>
@@ -41,7 +41,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; ind
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="py-28 px-6 bg-[#111111]">
+    <section id="testimonials" className="py-28 px-6 bg-[#F5F2EE]">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
           eyebrow="Client Stories"
@@ -55,22 +55,47 @@ export function Testimonials() {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-wrap justify-center gap-12 mt-16 pt-12 border-t border-[#2E2E2E]"
-        >
-          {['Nexus Technologies', 'Meridian Hospitality', 'Luminary Brands', 'The Artisan Club'].map((brand) => (
-            <p
-              key={brand}
-              className="text-xs tracking-[0.2em] uppercase text-[#2E2E2E] hover:text-[#C9A84C]/50 transition-colors duration-300 cursor-default"
-            >
-              {brand}
-            </p>
-          ))}
-        </motion.div>
+        <div className="mt-20 pt-12 border-t border-[#E5DED5] overflow-hidden relative">
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#F5F2EE] to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#F5F2EE] to-transparent z-10" />
+          
+          <motion.div
+            animate={{ x: [0, -1000] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: 'loop',
+                duration: 20,
+                ease: 'linear',
+              },
+            }}
+            className="flex gap-20 whitespace-nowrap min-w-max px-10"
+          >
+            {[
+              'Nexus Technologies', 
+              'Meridian Hospitality', 
+              'Luminary Brands', 
+              'The Artisan Club',
+              'Celestial Gifting',
+              'Elysian Curations',
+              'Regal Hampers',
+              'Nexus Technologies', 
+              'Meridian Hospitality', 
+              'Luminary Brands', 
+              'The Artisan Club',
+              'Celestial Gifting',
+              'Elysian Curations',
+              'Regal Hampers'
+            ].map((brand, i) => (
+              <p
+                key={i}
+                className="text-xs tracking-[0.3em] uppercase text-[#7A6E62] hover:text-[#C9A84C] transition-colors duration-300 cursor-default font-medium"
+              >
+                {brand}
+              </p>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   )

@@ -11,7 +11,7 @@ import {
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-28 px-6 bg-[#0E0E0E]">
+    <section id="faq" className="py-28 px-6 bg-[#FAFAF8]">
       <div className="max-w-3xl mx-auto">
         <SectionHeader
           eyebrow="FAQ"
@@ -41,7 +41,7 @@ export function FAQ() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-center text-[#8A8A8A] text-sm mt-10"
+          className="text-center text-[#7A6E62] text-sm mt-10"
         >
           Still have questions?{' '}
           <button

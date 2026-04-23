@@ -20,11 +20,11 @@ export function SectionHeader({ eyebrow, title, subtitle, centered = true }: Sec
       <p className="text-xs tracking-[0.3em] uppercase text-[#C9A84C] mb-4 font-medium">
         {eyebrow}
       </p>
-      <h2 className="font-serif text-4xl md:text-5xl font-light text-white leading-tight mb-5">
+      <h2 className="font-serif text-4xl md:text-5xl font-light text-[#1A1208] leading-tight mb-5">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-[#8A8A8A] text-base leading-relaxed max-w-2xl mx-auto">
+        <p className="text-[#7A6E62] text-base leading-relaxed max-w-2xl mx-auto">
           {subtitle}
         </p>
       )}

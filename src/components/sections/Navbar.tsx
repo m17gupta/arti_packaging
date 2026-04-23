@@ -28,7 +28,7 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-            ? 'bg-[#0E0E0E]/95 backdrop-blur-md border-b border-[#2E2E2E]'
+            ? 'bg-white/95 backdrop-blur-md border-b border-[#E5DED5] shadow-sm'
             : 'bg-transparent'
           }`}
       >
@@ -40,7 +40,7 @@ export function Navbar() {
               className="flex flex-col leading-none group"
               aria-label="Jain Creation"
             >
-              <span className="font-serif text-xl font-light text-white tracking-wide group-hover:text-[#C9A84C] transition-colors duration-300">
+              <span className="font-serif text-xl font-light text-[#1A1208] tracking-wide group-hover:text-[#C9A84C] transition-colors duration-300">
                 Jain Creation
               </span>
               <span className="text-[9px] tracking-[0.25em] uppercase text-[#C9A84C] mt-0.5">
@@ -53,7 +53,7 @@ export function Navbar() {
                 <button
                   key={link.href}
                   onClick={() => handleNavClick(link.href)}
-                  className="text-xs tracking-widest uppercase text-[#8A8A8A] hover:text-[#C9A84C] transition-colors duration-300 font-medium bg-transparent border-none cursor-pointer"
+                  className="text-xs tracking-widest uppercase text-[#5C5242] hover:text-[#C9A84C] transition-colors duration-300 font-medium bg-transparent border-none cursor-pointer"
                 >
                   {link.label}
                 </button>
@@ -72,7 +72,7 @@ export function Navbar() {
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden text-[#B0B0B0] hover:text-[#C9A84C] transition-colors p-1"
+              className="lg:hidden text-[#5C5242] hover:text-[#C9A84C] transition-colors p-1"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -88,7 +88,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-[#0E0E0E]/98 backdrop-blur-md flex flex-col pt-24 px-8"
+            className="fixed inset-0 z-40 bg-white/98 backdrop-blur-md flex flex-col pt-24 px-8"
           >
             <nav className="flex flex-col gap-6" aria-label="Mobile navigation">
               {navLinks.map((link, i) => (
@@ -98,7 +98,7 @@ export function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.06 }}
                   onClick={() => handleNavClick(link.href)}
-                  className="text-left text-2xl font-serif font-light text-white hover:text-[#C9A84C] transition-colors duration-300 bg-transparent border-none cursor-pointer"
+                  className="text-left text-2xl font-serif font-light text-[#1A1208] hover:text-[#C9A84C] transition-colors duration-300 bg-transparent border-none cursor-pointer"
                 >
                   {link.label}
                 </motion.button>

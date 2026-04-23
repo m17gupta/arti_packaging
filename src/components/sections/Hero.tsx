@@ -1,125 +1,211 @@
 "use client"
-import { motion } from 'motion/react'
-import { ArrowDown } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
+import { useState, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence, Variants } from 'motion/react'
+import { ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react'
+
+const slides = [
+  {
+    image: '/images/hero-luxury.png',
+    eyebrow: '',
+    title: '',
+    subtitle: '',
+    button: ''
+  },
+  {
+    image: '/images/hero-red.png',
+    eyebrow: 'Exquisite Corporate',
+    title: 'Collections',
+    subtitle: 'PREMIUM • BESPOKE • ARTISANAL',
+    button: 'EXPLORE RED'
+  },
+  {
+    image: '/images/hero-gold.png',
+    eyebrow: 'Celebrate Every',
+    title: 'Moment',
+    subtitle: 'FESTIVE • GLOWING • TIMELESS',
+    button: 'VIEW GOLD'
+  },
+  {
+    image: '/images/hero-emerald.png',
+    eyebrow: 'The Art of',
+    title: 'Sophistication',
+    subtitle: 'DEEP • EMERALD • ELEGANCE',
+    button: 'DISCOVER GREEN'
+  }
+]
 
 export function Hero() {
+  const [current, setCurrent] = useState(0)
+  const [direction, setDirection] = useState(0)
+
+  const nextSlide = useCallback(() => {
+    setDirection(1)
+    setCurrent((prev) => (prev + 1) % slides.length)
+  }, [])
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1)
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length)
+  }, [])
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 6000)
+    return () => clearInterval(timer)
+  }, [nextSlide])
+
   const scrollTo = (href: string) => {
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
   }
 
+const variants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 1000 : -1000,
+    opacity: 0,
+    scale: 1.1,
+    transition: { type: 'spring', stiffness: 300, damping: 30 } as const
+  }),
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      x: { type: 'spring', stiffness: 300, damping: 30 } as const,
+      opacity: { duration: 0.8 },
+      scale: { duration: 1.5, ease: 'easeOut' }
+    }
+  },
+  exit: (direction: number) => ({
+    zIndex: 0,
+    x: direction < 0 ? 1000 : -1000,
+    opacity: 0,
+    transition: {
+      x: { type: 'spring', stiffness: 300, damping: 30 } as const,
+      opacity: { duration: 0.4 }
+    }
+  })
+} as const
+
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative h-screen min-h-[700px] flex items-center overflow-hidden bg-black"
       aria-label="Hero section"
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url('https://images.pexels.com/photos/6373302/pexels-photo-6373302.jpeg?auto=compress&cs=tinysrgb&w=1920')`,
-        }}
-        aria-hidden="true"
-      />
-      <div className="absolute inset-0 bg-[#0E0E0E]/75" aria-hidden="true" />
-      <div
-        className="absolute inset-0"
-        style={{ background: 'radial-gradient(ellipse at center, transparent 30%, #0E0E0E 100%)' }}
-        aria-hidden="true"
-      />
+      {/* Background Images with AnimatePresence */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+            key={current}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('${slides[current].image}')`,
+            }}
+          />
+        </AnimatePresence>
+      </div>
+      
+      {/* Subtle Overlay */}
+      <div className="absolute inset-0 bg-black/20 z-10" aria-hidden="true" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="text-xs tracking-[0.4em] uppercase text-[#C9A84C] mb-6 font-medium"
-        >
-          Est. 2018 — Crafted in India
-        </motion.p>
+      {/* Slider Navigation Arrows */}
+      <button 
+        onClick={prevSlide}
+        className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 rounded-full transition-all z-30 group"
+      >
+        <ChevronLeft size={40} strokeWidth={1} className="group-hover:-translate-x-1 transition-transform" />
+      </button>
+      <button 
+        onClick={nextSlide}
+        className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 rounded-full transition-all z-30 group"
+      >
+        <ChevronRight size={40} strokeWidth={1} className="group-hover:translate-x-1 transition-transform" />
+      </button>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-white leading-[1.05] mb-6"
-        >
-          Premium Gift
-          <br />
-          <span className="gold-gradient italic">Packages</span>
-          <br />
-          Crafted to Impress
-        </motion.h1>
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-12 flex justify-end">
+        <div className="max-w-xl text-right flex flex-col items-center lg:items-end">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="flex flex-col items-center lg:items-end"
+            >
+              <span className="text-white text-sm lg:text-lg tracking-[0.2em] font-light mb-2 uppercase">
+                {slides[current].eyebrow}
+              </span>
+              <h1 className="font-script text-7xl md:text-8xl lg:text-9xl text-white leading-none mb-6">
+                {slides[current].title}
+              </h1>
+              
+              <div className="overflow-hidden mb-10 w-full lg:w-auto">
+                <motion.p 
+                  initial={{ width: 0 }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="text-white/90 text-[10px] md:text-xs tracking-[0.4em] uppercase font-medium text-center lg:text-right border-t border-b border-white/20 py-4 px-6 whitespace-nowrap bg-black/5 backdrop-blur-sm"
+                >
+                  {slides[current].subtitle}
+                </motion.p>
+              </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.8 }}
-          className="text-[#B0B0B0] text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10"
-        >
-          From bespoke corporate hampers to artisan gift boxes and signature specialty hammers —
-          every package we create is a masterpiece in itself.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 1.0 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <Button
-            variant="gold"
-            size="lg"
-            onClick={() => scrollTo('#products')}
-          >
-            Explore Collections
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={() => scrollTo('#contact')}
-          >
-            Request a Quote
-          </Button>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="flex gap-12 justify-center mt-16 pt-10 border-t border-[#2E2E2E]"
-        >
-          {[
-            { value: '5000+', label: 'Packages Delivered' },
-            { value: '200+', label: 'Corporate Clients' },
-            { value: '98%', label: 'Client Satisfaction' },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="font-serif text-3xl md:text-4xl font-light text-[#C9A84C]">
-                {stat.value}
-              </p>
-              <p className="text-xs tracking-widest uppercase text-[#8A8A8A] mt-1">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <button
+                  onClick={() => scrollTo('#collections')}
+                  className="px-12 py-4 border border-white text-white text-[10px] tracking-[0.4em] uppercase hover:bg-white hover:text-black transition-all duration-500 font-medium bg-black/10 backdrop-blur-md"
+                >
+                  {slides[current].button}
+                </button>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
 
+      {/* Slider dots */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-4 z-30">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => {
+              setDirection(i > current ? 1 : -1)
+              setCurrent(i)
+            }}
+            className={`transition-all duration-500 rounded-full h-1.5 ${
+              i === current ? 'w-8 bg-white' : 'w-1.5 bg-white/30 hover:bg-white/50'
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Bottom Scroll Indicator */}
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 2 }}
         onClick={() => scrollTo('#about')}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[#C9A84C] hover:text-[#E8C96B] transition-colors cursor-pointer bg-transparent border-none"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 hover:text-white transition-colors cursor-pointer bg-transparent border-none hidden lg:block z-30"
         aria-label="Scroll down"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <ArrowDown size={20} strokeWidth={1.5} />
+          <ArrowDown size={24} strokeWidth={1} />
         </motion.div>
       </motion.button>
     </section>
   )
 }
+
+

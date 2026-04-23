@@ -12,7 +12,7 @@ import { Footer } from '@/components/sections/Footer'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0E0E0E]">
+    <div className="min-h-screen bg-[#FAFAF8]">
       <Navbar />
       <main>
         <Hero />

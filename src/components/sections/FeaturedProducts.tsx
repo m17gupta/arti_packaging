@@ -1,3 +1,4 @@
+"use client"
 import { motion } from 'motion/react'
 import { featuredProducts } from '@/data'
 import { SectionHeader } from '@/components/shared/SectionHeader'

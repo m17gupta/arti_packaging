@@ -1,3 +1,4 @@
+"use client"
 import { motion } from 'motion/react'
 
 const footerLinks = {
@@ -43,7 +44,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <div className="mb-4">
               <p className="font-serif text-2xl font-light text-white">
-                Hammer &amp; Hampers
+                Jain Creation
               </p>
               <p className="text-[10px] tracking-[0.25em] uppercase text-[#C9A84C] mt-1">
                 Premium Gift Packages Crafted to Impress
@@ -88,11 +89,9 @@ export function Footer() {
           ))}
         </motion.div>
 
-        <div className="metallic-divider" />
-
         <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-[#8A8A8A]">
-            &copy; {new Date().getFullYear()} Hammer &amp; Hampers. All rights reserved.
+            &copy; 2025 Jain Creation . All rights reserved.
           </p>
           <div className="flex gap-6">
             {['Privacy Policy', 'Terms of Service', 'Refund Policy'].map((item) => (

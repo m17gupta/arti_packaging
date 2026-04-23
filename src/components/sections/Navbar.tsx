@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Menu, X } from 'lucide-react'
@@ -26,11 +27,10 @@ export function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
             ? 'bg-[#0E0E0E]/95 backdrop-blur-md border-b border-[#2E2E2E]'
             : 'bg-transparent'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
@@ -38,10 +38,10 @@ export function Navbar() {
               href="#"
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
               className="flex flex-col leading-none group"
-              aria-label="Hammer & Hampers home"
+              aria-label="Jain Creation"
             >
               <span className="font-serif text-xl font-light text-white tracking-wide group-hover:text-[#C9A84C] transition-colors duration-300">
-                Hammer &amp; Hampers
+                Jain Creation
               </span>
               <span className="text-[9px] tracking-[0.25em] uppercase text-[#C9A84C] mt-0.5">
                 Premium Gift Packages

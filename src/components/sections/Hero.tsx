@@ -1,3 +1,4 @@
+"use client"
 import { motion } from 'motion/react'
 import { ArrowDown } from 'lucide-react'
 import { Button } from '@/components/ui/Button'

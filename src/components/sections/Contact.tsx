@@ -1,3 +1,4 @@
+"use client"
 import { useState, type FormEvent } from 'react'
 import { motion } from 'motion/react'
 import { SectionHeader } from '@/components/shared/SectionHeader'
@@ -26,9 +27,9 @@ const initialForm: FormData = {
 }
 
 const contactInfo = [
-  { icon: Mail, label: 'Email', value: 'studio@hammerandhampers.in' },
-  { icon: Phone, label: 'Phone', value: '+91 98765 43210' },
-  { icon: MapPin, label: 'Studio', value: 'Mumbai, Maharashtra, India' },
+  { icon: Mail, label: 'Email', value: 'guptaarti132@gmail.com' },
+  { icon: Phone, label: 'Phone', value: '+91 8777 543 567' },
+  { icon: MapPin, label: 'Studio', value: 'Kolkata, West Bengal, India' },
 ]
 
 export function Contact() {

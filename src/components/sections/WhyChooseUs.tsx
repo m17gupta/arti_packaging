@@ -1,3 +1,4 @@
+"use client"
 import { motion } from 'motion/react'
 import { whyChooseUs } from '@/data'
 import { SectionHeader } from '@/components/shared/SectionHeader'

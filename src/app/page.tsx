@@ -10,7 +10,7 @@ import { FAQ } from '@/components/sections/FAQ'
 import { Contact } from '@/components/sections/Contact'
 import { Footer } from '@/components/sections/Footer'
 
-export default function App() {
+export default function Home() {
   return (
     <div className="min-h-screen bg-[#0E0E0E]">
       <Navbar />

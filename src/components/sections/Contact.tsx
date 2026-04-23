@@ -1,54 +1,15 @@
 "use client"
-import { useState, type FormEvent } from 'react'
 import { motion } from 'motion/react'
 import { SectionHeader } from '@/components/shared/SectionHeader'
-import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
-import { Textarea } from '@/components/ui/Textarea'
-import { Label } from '@/components/ui/Label'
-import { Mail, Phone, MapPin, CircleCheck as CheckCircle } from 'lucide-react'
-
-interface FormData {
-  name: string
-  email: string
-  company: string
-  phone: string
-  quantity: string
-  message: string
-}
-
-const initialForm: FormData = {
-  name: '',
-  email: '',
-  company: '',
-  phone: '',
-  quantity: '',
-  message: '',
-}
+import { Mail, Phone, MapPin } from 'lucide-react'
 
 const contactInfo = [
   { icon: Mail, label: 'Email', value: 'guptaarti132@gmail.com' },
   { icon: Phone, label: 'Phone', value: '+91 8777 543 567' },
-  { icon: MapPin, label: 'Studio', value: 'Kolkata, West Bengal, India' },
+  { icon: MapPin, label: 'Studio', value: 'B-801 Emami City, Jessore Road, Dum Dum, Kolkata - 700028' },
 ]
 
 export function Contact() {
-  const [form, setForm] = useState<FormData>(initialForm)
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  }
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    await new Promise((r) => setTimeout(r, 1200))
-    setLoading(false)
-    setSubmitted(true)
-  }
-
   return (
     <section id="contact" className="py-28 px-6 bg-[#F5F2EE]">
       <div className="max-w-7xl mx-auto">
@@ -104,122 +65,25 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="lg:col-span-3 bg-white border border-[#E5DED5] p-8 shadow-sm"
+            className="lg:col-span-3"
           >
-            {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center justify-center h-full py-16 text-center gap-5"
-              >
-                <CheckCircle size={48} className="text-[#C9A84C]" strokeWidth={1} />
-                <div>
-                  <h3 className="font-serif text-2xl font-light text-[#1A1208] mb-2">
-                    Enquiry Received
-                  </h3>
-                  <p className="text-[#7A6E62] text-sm">
-                    Thank you for reaching out. Our team will be in touch within 4 business hours.
-                  </p>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setSubmitted(false)}
-                >
-                  Send Another Enquiry
-                </Button>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Full Name *</Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      placeholder="Your full name"
-                      value={form.name}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="you@company.com"
-                      value={form.email}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company / Organisation</Label>
-                    <Input
-                      id="company"
-                      name="company"
-                      placeholder="Your company name"
-                      value={form.company}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      placeholder="+91 XXXXX XXXXX"
-                      value={form.phone}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="quantity">Estimated Quantity</Label>
-                  <Input
-                    id="quantity"
-                    name="quantity"
-                    placeholder="e.g. 50 packages, 200 hampers"
-                    value={form.quantity}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="message">Tell Us About Your Needs *</Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Describe your gifting occasion, preferences, budget range, and any special requirements..."
-                    value={form.message}
-                    onChange={handleChange}
-                    rows={5}
-                    required
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  variant="gold"
-                  size="lg"
-                  className="w-full"
-                  disabled={loading || !form.name || !form.email || !form.message}
-                >
-                  {loading ? 'Sending...' : 'Send Enquiry'}
-                </Button>
-
-                <p className="text-[#7A6E62] text-xs text-center">
-                  We respect your privacy. Your information will never be shared.
-                </p>
-              </form>
-            )}
+            <div className="relative group">
+              {/* Decorative background element for "color" and premium feel */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#C9A84C] to-[#E8C96B] rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+              
+              <div className="relative w-full h-[500px] bg-white border border-[#C9A84C]/20 overflow-hidden rounded-2xl shadow-2xl">
+                <iframe 
+                  src="https://maps.google.com/maps?q=Emami%20City,%20Jessore%20Road,%20Dum%20Dum,%20Kolkata%20700028&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Studio Location"
+                ></iframe>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>

@@ -5,32 +5,32 @@ import { ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const slides = [
   {
-    image: '/images/hero-luxury.png',
-    eyebrow: '',
-    title: '',
-    subtitle: '',
-    button: ''
+    image: 'https://images.unsplash.com/photo-1656821991452-648b8312a30b?auto=compress&cs=tinysrgb&w=1200',
+    eyebrow: 'Elegance Redefined',
+    title: 'The Art of Gifting',
+    subtitle: 'LUXURY • BESPOKE • TIMELESS',
+    button: 'EXPLORE COLLECTIONS'
   },
   {
-    image: '/images/hero-red.png',
+    image: 'https://images.unsplash.com/photo-1656821991475-86b1b2ba3c32?auto=compress&cs=tinysrgb&w=1200',
     eyebrow: 'Exquisite Corporate',
     title: 'Collections',
-    subtitle: 'PREMIUM • BESPOKE • ARTISANAL',
-    button: 'EXPLORE RED'
+    subtitle: 'PREMIUM • PROFESSIONAL • UNIQUE',
+    button: 'VIEW CORPORATE'
   },
   {
-    image: '/images/hero-gold.png',
+    image: 'https://images.pexels.com/photos/32498681/pexels-photo-32498681.jpeg?auto=compress&cs=tinysrgb&w=1200',
     eyebrow: 'Celebrate Every',
     title: 'Moment',
-    subtitle: 'FESTIVE • GLOWING • TIMELESS',
-    button: 'VIEW GOLD'
+    subtitle: 'FESTIVE • GOLDEN • EXCLUSIVE',
+    button: 'VIEW LUXURY'
   },
   {
-    image: '/images/hero-emerald.png',
-    eyebrow: 'The Art of',
-    title: 'Sophistication',
-    subtitle: 'DEEP • EMERALD • ELEGANCE',
-    button: 'DISCOVER GREEN'
+    image: 'https://images.pexels.com/photos/28769884/pexels-photo-28769884.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    eyebrow: 'Traditional',
+    title: 'Heritage',
+    subtitle: 'DIWALI • FESTIVE • JOYFUL',
+    button: 'DISCOVER FESTIVE'
   }
 ]
 

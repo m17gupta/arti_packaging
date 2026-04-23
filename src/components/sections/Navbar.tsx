@@ -37,15 +37,22 @@ export function Navbar() {
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-              className="flex flex-col leading-none group"
+              className="flex items-center gap-4 group"
               aria-label="Jain Creation"
             >
-              <span className="font-serif text-xl font-light text-[#1A1208] tracking-wide group-hover:text-[#C9A84C] transition-colors duration-300">
-                Jain Creation
-              </span>
-              <span className="text-[9px] tracking-[0.25em] uppercase text-[#C9A84C] mt-0.5">
-                Premium Gift Packages
-              </span>
+              <img 
+                src="/logo.png" 
+                alt="Jain Creation Logo" 
+                className="h-14 w-14 object-contain rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300" 
+              />
+              <div className="flex flex-col leading-none">
+                <span className="font-serif text-xl font-light text-[#1A1208] tracking-wide group-hover:text-[#C9A84C] transition-colors duration-300">
+                  Jain Creation
+                </span>
+                <span className="text-[9px] tracking-[0.25em] uppercase text-[#C9A84C] mt-0.5">
+                  Premium Gift Packages
+                </span>
+              </div>
             </a>
 
             <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">

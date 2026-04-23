@@ -6,8 +6,8 @@ const footerLinks = {
     'Corporate Hampers',
     'Festive Collections',
     'Luxury Gift Boxes',
-    'Specialty Hammers',
-    'Wellness Packages',
+    'Wedding Hampers',
+    'Chocolate Collections',
     'Custom Packages',
   ],
   Company: [
@@ -42,17 +42,29 @@ export function Footer() {
           className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10"
         >
           <div className="lg:col-span-2">
-            <div className="mb-4">
-              <p className="font-serif text-2xl font-light text-[#1A1208]">
-                Jain Creation
-              </p>
-              <p className="text-[10px] tracking-[0.25em] uppercase text-[#C9A84C] mt-1">
-                Premium Gift Packages Crafted to Impress
-              </p>
-            </div>
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+              className="flex items-center gap-4 group mb-4"
+              aria-label="Jain Creation"
+            >
+              <img 
+                src="/logo.png" 
+                alt="Jain Creation Logo" 
+                className="h-16 w-16 object-contain rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300" 
+              />
+              <div className="flex flex-col leading-none">
+                <span className="font-serif text-xl font-light text-[#1A1208] tracking-wide group-hover:text-[#C9A84C] transition-colors duration-300">
+                  Jain Creation
+                </span>
+                <span className="text-[9px] tracking-[0.25em] uppercase text-[#C9A84C] mt-0.5">
+                  Premium Gift Packages
+                </span>
+              </div>
+            </a>
             <p className="text-[#7A6E62] text-sm leading-relaxed max-w-xs mt-4">
               India&apos;s premier artisan gifting studio. Crafting premium gift
-              packages, corporate hampers, and specialty gift hammers since 2018.
+              packages, corporate hampers, and bespoke collections since 2018.
             </p>
 
             <div className="flex gap-3 mt-6">
@@ -91,7 +103,7 @@ export function Footer() {
 
         <div className="py-6 border-t border-[#DDD6CC] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-[#7A6E62]">
-            &copy; 2025 Jain Creation . All rights reserved.
+            &copy; 2026 Jain Creation . All rights reserved.
           </p>
           <div className="flex gap-6">
             {['Privacy Policy', 'Terms of Service', 'Refund Policy'].map((item) => (

@@ -41,7 +41,7 @@ export function Navbar() {
               aria-label="Jain Creation"
             >
               <img 
-                src="/logo.png" 
+                src="/logo.jpg" 
                 alt="Jain Creation Logo" 
                 className="h-14 w-14 object-contain rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300" 
               />
@@ -50,7 +50,7 @@ export function Navbar() {
                   Jain Creation
                 </span>
                 <span className="text-[9px] tracking-[0.25em] uppercase text-[#C9A84C] mt-0.5">
-                  Premium Gift Packages
+                  The Art of Gifting
                 </span>
               </div>
             </a>

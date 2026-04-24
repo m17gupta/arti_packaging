@@ -20,7 +20,7 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
-  title: "Jain Creation | Premium Gift Packages",
+  title: "Jain Creation | The Art of Gifting",
   description: "Artisan gift hampers and premium specialty packages crafted in India.",
 };
 

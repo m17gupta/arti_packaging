@@ -1,9 +1,18 @@
 "use client"
 import { motion } from 'motion/react'
 import { Badge } from '@/components/ui/Badge'
-import { productCategories } from '@/data'
+import { useCollections } from '@/hooks/useCollections'
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
 export function Collections() {
+  const { collections, loading } = useCollections()
+
+  if (loading) return null
+
+  // Show only first 6 on the home page for better layout
+  const displayCollections = collections.slice(0, 6)
+
   return (
     <section id="collections" className="py-24 bg-[#F5F2EE]">
       <div className="container mx-auto px-4 lg:px-8">
@@ -21,19 +30,31 @@ export function Collections() {
               Gifting for every <span className="gold-gradient italic">occasion</span>
             </h2>
           </motion.div>
-          <motion.p 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-stone-600 max-w-md text-lg leading-relaxed"
-          >
-            From intimate personal gifts to large-scale corporate programs — explore our curated collections designed for every need.
-          </motion.p>
+          <div className="flex flex-col items-start md:items-end gap-6">
+            <motion.p 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-stone-600 max-w-md text-lg leading-relaxed text-left md:text-right"
+            >
+              From intimate personal gifts to large-scale corporate programs — explore our curated collections designed for every need.
+            </motion.p>
+            <Link href="/gallery">
+              <motion.button
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-2 text-amber-700 font-medium tracking-widest uppercase text-xs group"
+              >
+                View All Collections <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </motion.button>
+            </Link>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
-          {productCategories.map((category, i) => (
+          {displayCollections.map((category, i) => (
             <motion.div
               key={category.id}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -45,7 +66,7 @@ export function Collections() {
               }`}
             >
               <img
-                src={category.imageUrl}
+                src={category.primaryImage?.url}
                 alt={category.name}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
@@ -54,12 +75,12 @@ export function Collections() {
               <div className="absolute inset-0 p-6 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                 <div className="overflow-hidden">
                   <motion.p className="text-amber-400 text-xs font-semibold tracking-[0.2em] uppercase mb-2">
-                    {category.itemCount > 0 ? `${category.itemCount} Items` : 'Custom'}
+                    {(category.itemCount || 0) > 0 ? `${category.itemCount} Items` : 'Custom'}
                   </motion.p>
                 </div>
                 <h3 className="text-white text-2xl lg:text-3xl font-serif mb-2">{category.name}</h3>
                 <p className="text-white/70 text-sm line-clamp-2 max-h-0 group-hover:max-h-20 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
-                  {category.description}
+                  {category.description || 'Premium curated collection for your gifting needs.'}
                 </p>
               </div>
             </motion.div>

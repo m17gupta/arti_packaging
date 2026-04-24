@@ -1,6 +1,6 @@
 import type {
   NavLink,
-  ProductCategory,
+  Collection,
   FeaturedProduct,
   Testimonial,
   ProcessStep,
@@ -18,54 +18,66 @@ export const navLinks: NavLink[] = [
   { label: 'Contact', href: '#contact' },
 ]
 
-export const productCategories: ProductCategory[] = [
+export const productCategories: Collection[] = [
   {
     id: 'corporate-hampers',
     name: 'Corporate Hampers',
     description: 'Tailored gifting solutions for businesses, client appreciation, and team recognition programs.',
     icon: '🏢',
-    imageUrl: 'https://images.pexels.com/photos/17878238/pexels-photo-17878238.jpeg?auto=compress&cs=tinysrgb&w=800',
+    primaryImage: { url: 'https://images.pexels.com/photos/17878238/pexels-photo-17878238.jpeg?auto=compress&cs=tinysrgb&w=800' },
     itemCount: 24,
+    slug: 'corporate-hampers',
+    isActive: true
   },
   {
     id: 'festive-collections',
     name: 'Festive Collections',
     description: 'Seasonal gift packages curated for every celebration — from Diwali to Christmas and beyond.',
     icon: '🎄',
-    imageUrl: 'https://images.pexels.com/photos/28769884/pexels-photo-28769884.jpeg?auto=compress&cs=tinysrgb&w=800',
+    primaryImage: { url: 'https://images.pexels.com/photos/28769884/pexels-photo-28769884.jpeg?auto=compress&cs=tinysrgb&w=800' },
     itemCount: 18,
+    slug: 'festive-collections',
+    isActive: true
   },
   {
     id: 'luxury-gift-boxes',
     name: 'Luxury Gift Boxes',
     description: 'Handcrafted bespoke boxes with premium curation — the pinnacle of personal gifting.',
     icon: '🎁',
-    imageUrl: 'https://images.pexels.com/photos/32498681/pexels-photo-32498681.jpeg?auto=compress&cs=tinysrgb&w=800',
+    primaryImage: { url: 'https://images.pexels.com/photos/32498681/pexels-photo-32498681.jpeg?auto=compress&cs=tinysrgb&w=800' },
     itemCount: 32,
+    slug: 'luxury-gift-boxes',
+    isActive: true
   },
   {
     id: 'specialty-hammers',
     name: 'Wedding Hampers',
     description: 'Exquisite gifting for the most special day — thoughtfully curated for couples and guests alike.',
     icon: '💍',
-    imageUrl: 'https://images.unsplash.com/photo-1656821991475-86b1b2ba3c32?auto=compress&cs=tinysrgb&w=800',
+    primaryImage: { url: 'https://images.unsplash.com/photo-1656821991475-86b1b2ba3c32?auto=compress&cs=tinysrgb&w=800' },
     itemCount: 12,
+    slug: 'wedding-hampers',
+    isActive: true
   },
   {
     id: 'wellness-packages',
     name: 'Chocolate Collections',
     description: 'Premium handcrafted chocolates and confectionery for every sweet tooth.',
     icon: '🍫',
-    imageUrl: 'https://images.pexels.com/photos/16762643/pexels-photo-16762643.jpeg?auto=compress&cs=tinysrgb&w=800',
+    primaryImage: { url: 'https://images.pexels.com/photos/16762643/pexels-photo-16762643.jpeg?auto=compress&cs=tinysrgb&w=800' },
     itemCount: 15,
+    slug: 'chocolate-collections',
+    isActive: true
   },
   {
     id: 'custom-packages',
     name: 'Custom Packages',
     description: 'Fully personalized gifting packages designed from scratch to match your exact vision.',
     icon: '✨',
-    imageUrl: 'https://images.pexels.com/photos/34198898/pexels-photo-34198898.jpeg?auto=compress&cs=tinysrgb&w=800',
+    primaryImage: { url: 'https://images.pexels.com/photos/34198898/pexels-photo-34198898.jpeg?auto=compress&cs=tinysrgb&w=800' },
     itemCount: 0,
+    slug: 'custom-packages',
+    isActive: true
   },
 ]
 

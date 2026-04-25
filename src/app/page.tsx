@@ -9,6 +9,7 @@ import { Testimonials } from '@/components/sections/Testimonials'
 import { FAQ } from '@/components/sections/FAQ'
 import { Contact } from '@/components/sections/Contact'
 import { Footer } from '@/components/sections/Footer'
+import GetAllCollection from '@/components/collection/GetAllCollection'
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <Hero />
         <About />
         <Collections />
+        <GetAllCollection />
         <FeaturedProducts />
         <WhyChooseUs />
         <Process />

@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   description: "Artisan gift hampers and premium specialty packages crafted in India.",
 };
 
+import { Toaster } from "sonner";
+import { Providers } from "@/lib/providers";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,7 +35,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${cormorant.variable} ${greatVibes.variable} antialiased`}>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   );

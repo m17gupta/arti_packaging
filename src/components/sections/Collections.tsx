@@ -4,14 +4,17 @@ import { Badge } from '@/components/ui/Badge'
 import { useCollections } from '@/hooks/useCollections'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { RootState } from '@/lib/store'
+import { useSelector } from 'react-redux'
+
 
 export function Collections() {
   const { collections, loading } = useCollections()
+  const { allCollection, isFetchedCollection } = useSelector((state: RootState) => state.collection)
 
-  if (loading) return null
 
   // Show only first 6 on the home page for better layout
-  const displayCollections = collections.slice(0, 6)
+  const displayCollections = isFetchedCollection ? allCollection.slice(0, 6) : collections.slice(0, 6)
 
   return (
     <section id="collections" className="py-24 bg-[#F5F2EE]">
@@ -56,7 +59,7 @@ export function Collections() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
           {displayCollections.map((category, i) => (
             <motion.div
-              key={category.id}
+              key={category._id}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}

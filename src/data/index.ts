@@ -1,12 +1,6 @@
-import type {
-  NavLink,
-  Collection,
-  FeaturedProduct,
-  Testimonial,
-  ProcessStep,
-  WhyChooseUsItem,
-  FAQItem,
-} from '@/types'
+import { ICollection } from "@/lib/slice/collection/CollectionType"
+import { FAQItem, FeaturedProduct, NavLink, ProcessStep, Testimonial, WhyChooseUsItem } from "@/types"
+
 
 export const navLinks: NavLink[] = [
   { label: 'About', href: '#about' },
@@ -18,9 +12,9 @@ export const navLinks: NavLink[] = [
   { label: 'Contact', href: '#contact' },
 ]
 
-export const productCategories: Collection[] = [
+export const productCategories: ICollection[] = [
   {
-    id: 'corporate-hampers',
+    _id: 'corporate-hampers',
     name: 'Corporate Hampers',
     description: 'Tailored gifting solutions for businesses, client appreciation, and team recognition programs.',
     icon: '🏢',
@@ -30,7 +24,7 @@ export const productCategories: Collection[] = [
     isActive: true
   },
   {
-    id: 'festive-collections',
+    _id: 'festive-collections',
     name: 'Festive Collections',
     description: 'Seasonal gift packages curated for every celebration — from Diwali to Christmas and beyond.',
     icon: '🎄',
@@ -40,7 +34,7 @@ export const productCategories: Collection[] = [
     isActive: true
   },
   {
-    id: 'luxury-gift-boxes',
+    _id: 'luxury-gift-boxes',
     name: 'Luxury Gift Boxes',
     description: 'Handcrafted bespoke boxes with premium curation — the pinnacle of personal gifting.',
     icon: '🎁',
@@ -50,7 +44,7 @@ export const productCategories: Collection[] = [
     isActive: true
   },
   {
-    id: 'specialty-hammers',
+    _id: 'specialty-hammers',
     name: 'Wedding Hampers',
     description: 'Exquisite gifting for the most special day — thoughtfully curated for couples and guests alike.',
     icon: '💍',
@@ -60,7 +54,7 @@ export const productCategories: Collection[] = [
     isActive: true
   },
   {
-    id: 'wellness-packages',
+    _id: 'wellness-packages',
     name: 'Chocolate Collections',
     description: 'Premium handcrafted chocolates and confectionery for every sweet tooth.',
     icon: '🍫',
@@ -70,7 +64,7 @@ export const productCategories: Collection[] = [
     isActive: true
   },
   {
-    id: 'custom-packages',
+    _id: 'custom-packages',
     name: 'Custom Packages',
     description: 'Fully personalized gifting packages designed from scratch to match your exact vision.',
     icon: '✨',

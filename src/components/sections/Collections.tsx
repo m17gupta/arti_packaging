@@ -3,7 +3,7 @@ import { motion } from 'motion/react'
 import { Badge } from '@/components/ui/Badge'
 import { useCollections } from '@/hooks/useCollections'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Loader2 } from 'lucide-react'
 import { RootState } from '@/lib/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
@@ -22,7 +22,7 @@ export function Collections() {
   };
 
   // Show only first 6 on the home page for better layout
-  const displayCollections = isFetchedCollection ? allCollection.slice(0, 6) : collections.slice(0, 6)
+  // const displayCollections = isFetchedCollection ? allCollection.slice(0, 6) : collections.slice(0, 6)
 
   return (
     <section id="collections" className="py-24 bg-[#F5F2EE]">
@@ -64,8 +64,8 @@ export function Collections() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
-          {displayCollections.map((category, i) => (
+      {isFetchedCollection ? allCollection.length>0 &&<div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+          {allCollection.map((category, i) => (
             <motion.div
               key={category._id}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -98,7 +98,11 @@ export function Collections() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </div>:(
+          <>
+          <Loader2/>
+          </>
+        )}
       </div>
     </section>
   )

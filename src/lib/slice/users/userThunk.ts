@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { User } from '@/types';
+import { IUser } from './userType';
 
 const API_URL = '/api/users';
 
@@ -9,7 +9,7 @@ export const getAllUsers = createAsyncThunk(
     try {
       const response = await fetch(API_URL);
       if (!response.ok) throw new Error('Failed to fetch users');
-      return (await response.json()) as User[];
+      return (await response.json()) as IUser[];
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -22,7 +22,7 @@ export const getUser = createAsyncThunk(
     try {
       const response = await fetch(`${API_URL}/${id}`);
       if (!response.ok) throw new Error('Failed to fetch user');
-      return (await response.json()) as User;
+      return (await response.json()) as IUser;
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -31,7 +31,7 @@ export const getUser = createAsyncThunk(
 
 export const createUser = createAsyncThunk(
   'user/create',
-  async (user: User, { rejectWithValue }) => {
+  async (user: IUser, { rejectWithValue }) => {
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
@@ -39,7 +39,7 @@ export const createUser = createAsyncThunk(
         body: JSON.stringify(user),
       });
       if (!response.ok) throw new Error('Failed to create user');
-      return (await response.json()) as User;
+      return (await response.json()) as IUser;
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -48,7 +48,7 @@ export const createUser = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
   'user/update',
-  async ({ id, data }: { id: string; data: Partial<User> }, { rejectWithValue }) => {
+  async ({ id, data }: { id: string; data: Partial<IUser> }, { rejectWithValue }) => {
     try {
       const response = await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
@@ -56,7 +56,7 @@ export const updateUser = createAsyncThunk(
         body: JSON.stringify(data),
       });
       if (!response.ok) throw new Error('Failed to update user');
-      return (await response.json()) as User;
+      return (await response.json()) as IUser;
     } catch (error: any) {
       return rejectWithValue(error.message);
     }

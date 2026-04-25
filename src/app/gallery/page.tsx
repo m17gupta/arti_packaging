@@ -6,12 +6,32 @@ import { useCollections } from '@/hooks/useCollections'
 import { Badge } from '@/components/ui/Badge'
 import { Navbar } from '@/components/sections/Navbar'
 import { Footer } from '@/components/sections/Footer'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/lib/store'
+import { useMemo } from 'react'
+import { setCurrentCollection } from '@/lib/slice/collection/collectionSlice'
+import { useRouter } from 'next/navigation'
 
-export default function Gallery() {
+const  Gallery = () => {
   const { collections, loading } = useCollections()
+  const { currentCollection } = useSelector((state: RootState) => state.collection)
+  const dispatch = useDispatch()
+  const router= useRouter()
+  // if (loading) return null
 
-  if (loading) return null
 
+  const allImage = useMemo(() => {
+    const primary = currentCollection?.primaryImage?.url ? [currentCollection.primaryImage.url] : [];
+    const secondary = currentCollection?.secondaryImage?.map(img => img.url) || [];
+    return [...primary, ...secondary];
+  }, [currentCollection])
+
+  
+
+  const handleGoback = () => {
+    dispatch(setCurrentCollection(null))
+    router.push('/')
+  }
   return (
     <div className="min-h-screen bg-[#FDFCFB]">
       <Navbar />
@@ -23,7 +43,7 @@ export default function Gallery() {
             <div className="flex items-center gap-2 text-amber-600 mb-4 font-medium tracking-widest uppercase text-xs">
               <Link href="/" className="hover:underline flex items-center gap-1">Home</Link>
               <span>/</span>
-              <span>Collections Gallery</span>
+              <span>Collections /Gallery</span>
             </div>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div>
@@ -34,52 +54,95 @@ export default function Gallery() {
               </div>
               <div className="flex items-center gap-4">
                 <Badge variant="outline" className="h-10 px-4 rounded-full border-stone-200 text-stone-600">
-                  {collections.length} Collections Total
+                  {allImage.length} Collections Total
                 </Badge>
               </div>
             </div>
           </div>
 
           {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-            {collections.map((category, i) => (
-              <motion.div
-                key={category.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="group"
-              >
-                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-sm group-hover:shadow-xl transition-all duration-500">
-                  <img
-                    src={category.primaryImage?.url}
-                    alt={category.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
-                  
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                      <div className="flex items-center gap-3 mb-3">
-                        <span className="text-2xl">{category.icon}</span>
-                        <Badge className="bg-amber-400 text-amber-950 hover:bg-amber-400 border-0 text-[10px] uppercase tracking-tighter">
-                          {category.itemCount || 0} Items
-                        </Badge>
+          {currentCollection ? (
+            <div className="space-y-12">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-stone-100 pb-8">
+                {/* <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-3xl">{currentCollection.icon}</span>
+                    <h2 className="text-3xl font-serif text-stone-900">{currentCollection.name}</h2>
+                  </div>
+                  <p className="text-stone-500 max-w-2xl">{currentCollection.description || 'No description available.'}</p>
+                </div> */}
+                <button 
+                  onClick={handleGoback}
+                  className="flex items-center gap-2 px-6 py-3 bg-stone-50 text-stone-600 rounded-full hover:bg-stone-100 hover:text-amber-600 transition-all text-sm font-bold uppercase tracking-widest shadow-sm"
+                >
+                  <ArrowLeft size={16} /> Back to Collections
+                </button>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {allImage.map((url, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: i * 0.05, duration: 0.4 }}
+                    className="aspect-square relative rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all group cursor-zoom-in"
+                  >
+                    <img 
+                      src={url} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                      alt={`${currentCollection.name} image ${i + 1}`} 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute bottom-4 right-4 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-stone-900 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                      <Grid3X3 size={14} />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+              {collections.map((category, i) => (
+                <motion.div
+                  key={category._id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.6 }}
+                  className="group"
+                  onClick={() => dispatch(setCurrentCollection(category))}
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-sm group-hover:shadow-xl transition-all duration-500 cursor-pointer">
+                    <img
+                      src={category.primaryImage?.url}
+                      alt={category.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+                    
+                    <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                      <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <div className="flex items-center gap-3 mb-3">
+                          <span className="text-2xl">{category.icon}</span>
+                          <Badge className="bg-amber-400 text-amber-950 hover:bg-amber-400 border-0 text-[10px] uppercase tracking-tighter">
+                            {category.itemCount || 0} Items
+                          </Badge>
+                        </div>
+                        <h3 className="text-3xl font-serif text-white mb-3">{category.name}</h3>
+                        <p className="text-white/70 text-sm mb-6 line-clamp-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                          {category.description || 'No description available.'}
+                        </p>
+                        <button className="flex items-center gap-2 text-white text-xs font-semibold uppercase tracking-widest hover:text-amber-400 transition-colors">
+                          View Details <ExternalLink size={14} />
+                        </button>
                       </div>
-                      <h3 className="text-3xl font-serif text-white mb-3">{category.name}</h3>
-                      <p className="text-white/70 text-sm mb-6 line-clamp-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                        {category.description || 'No description available.'}
-                      </p>
-                      <button className="flex items-center gap-2 text-white text-xs font-semibold uppercase tracking-widest hover:text-amber-400 transition-colors">
-                        View Details <ExternalLink size={14} />
-                      </button>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </main>
 
@@ -87,3 +150,6 @@ export default function Gallery() {
     </div>
   )
 }
+
+
+export default Gallery

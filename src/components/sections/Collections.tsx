@@ -5,13 +5,21 @@ import { useCollections } from '@/hooks/useCollections'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { RootState } from '@/lib/store'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/navigation'
+import { ICollection } from '@/lib/slice/collection/CollectionType'
+import { setCurrentCollection } from '@/lib/slice/collection/collectionSlice'
 
 
 export function Collections() {
   const { collections, loading } = useCollections()
   const { allCollection, isFetchedCollection } = useSelector((state: RootState) => state.collection)
-
+  const router = useRouter();
+  const dispatch= useDispatch()
+  const handleCardClick = (item: ICollection) => {
+    dispatch(setCurrentCollection(item));
+    router.push(`/gallery`);
+  };
 
   // Show only first 6 on the home page for better layout
   const displayCollections = isFetchedCollection ? allCollection.slice(0, 6) : collections.slice(0, 6)
@@ -67,6 +75,8 @@ export function Collections() {
               className={`rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all group relative cursor-pointer ${
                 i === 0 ? 'md:row-span-2 md:col-span-1 aspect-[3/4] md:aspect-auto' : 'aspect-square'
               }`}
+
+              onClick={() => handleCardClick(category)}
             >
               <img
                 src={category.primaryImage?.url}
